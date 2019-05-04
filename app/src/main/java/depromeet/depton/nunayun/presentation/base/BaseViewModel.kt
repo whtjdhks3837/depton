@@ -6,7 +6,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
-class BaseViewModel : ViewModel() {
+open class BaseViewModel : ViewModel() {
     private val disposables = CompositeDisposable()
 
     override fun onCleared() {
