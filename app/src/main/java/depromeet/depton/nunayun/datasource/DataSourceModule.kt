@@ -1,5 +1,6 @@
 package depromeet.depton.nunayun.datasource
 
+import depromeet.depton.nunayun.datasource.remote.MockRetrofitService
 import depromeet.depton.nunayun.datasource.remote.RetrofitService
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -23,6 +24,7 @@ val dataSourceModule = module {
             .baseUrl("http://13.209.246.67:3000/")
             .build()
             .create()
+        //MockRetrofitService()
     }
 
     single {

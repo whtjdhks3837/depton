@@ -31,13 +31,8 @@ class QuizActivity : BaseActivity<ActivityQuizBinding>() {
     }
 
     private fun bindView() {
-        ObjectAnimator.ofFloat(card_quiz_flip2, "scaleX", 1f, 0f).apply {
-            interpolator = DecelerateInterpolator()
-            duration = 200
-            start()
-        }
-
-        showQuestion()
+        showFirst()
+        card_quiz_flip2.visibility = View.INVISIBLE
 
         image_quiz_flip2_up.setOnClickListener {
             image_quiz_flip2_up_select.visibility = View.VISIBLE
@@ -54,17 +49,36 @@ class QuizActivity : BaseActivity<ActivityQuizBinding>() {
         }
     }
 
+    private fun showFirst() {
+        Handler().postDelayed({
+            text_quiz_first_count.text = "2"
+        }, 1000L)
+        Handler().postDelayed({
+            text_quiz_first_count.text = "1"
+        }, 2000L)
+        Handler().postDelayed({
+            text_quiz_first_count.text = "0"
+            group_quiz_first.visibility = View.INVISIBLE
+            card_quiz_flip1.visibility = View.VISIBLE
+            card_quiz_flip2.visibility = View.VISIBLE
+            ObjectAnimator.ofFloat(card_quiz_flip2, "scaleX", 1f, 0f).apply {
+                interpolator = DecelerateInterpolator()
+                duration = 200
+                start()
+            }
+            showQuestion()
+        }, 3000L)
+    }
+
     private fun showQuestion() {
         text_quiz_title.text = getString(R.string.quiz_title_number, ++questionNumber)
         text_quiz_order.text = "$questionNumber/10"
-        highlight_quiz_title.setBackgroundColor(
-            Color.parseColor(
-                when (questionNumber % 3) {
-                    0 -> "#4cfff027"
-                    1 -> "#4c27ffa2"
-                    else -> "#2bff2779"
-                }
-            )
+        highlight_quiz_title.setImageResource(
+            when (questionNumber % 3) {
+                0 -> R.drawable.quiz_title_pk
+                1 -> R.drawable.quiz_title_gr
+                else -> R.drawable.quiz_title_yw
+            }
         )
         group_quiz_question.visibility = View.VISIBLE
 
@@ -81,34 +95,14 @@ class QuizActivity : BaseActivity<ActivityQuizBinding>() {
     }
 
     private fun showCountDown() {
-        group_quiz_countdown.visibility = View.VISIBLE
-        text_quiz_count.text = "3"
-        text_quiz_detail.text = getString(R.string.quiz_count_detail, 3)
+        ObjectAnimator.ofFloat(card_quiz_flip1, "scaleX", 1f, 0f).apply {
+            group_quiz_countdown.visibility = View.GONE
+            interpolator = DecelerateInterpolator()
+            duration = 200
+            start()
+        }
 
-        Handler().postDelayed({
-            text_quiz_count.text = "2"
-            text_quiz_detail.text = getString(R.string.quiz_count_detail, 2)
-        }, 1000L)
-
-        Handler().postDelayed({
-            text_quiz_detail.text = getString(R.string.quiz_count_detail, 1)
-            text_quiz_count.text = "1"
-        }, 2000L)
-
-        Handler().postDelayed({
-            text_quiz_detail.text = getString(R.string.quiz_count_detail, 0)
-            text_quiz_count.text = "0"
-
-            ObjectAnimator.ofFloat(card_quiz_flip1, "scaleX", 1f, 0f).apply {
-                group_quiz_countdown.visibility = View.GONE
-                interpolator = DecelerateInterpolator()
-                duration = 200
-                start()
-            }
-
-            showSelect()
-
-        }, 3000L)
+        showSelect()
     }
 
     private fun showSelect() {
@@ -122,7 +116,7 @@ class QuizActivity : BaseActivity<ActivityQuizBinding>() {
 
         object : CountDownTimer(3000, 10) {
             override fun onTick(millisUntilFinished: Long) {
-                pgbar_quiz.progress = millisUntilFinished.toInt() / 30
+                pgbar_quiz.progress = 100 - millisUntilFinished.toInt() / 30
             }
 
             override fun onFinish() {
@@ -134,7 +128,7 @@ class QuizActivity : BaseActivity<ActivityQuizBinding>() {
                     image_quiz_flip2_up_select.visibility = View.INVISIBLE
                     image_quiz_flip2_down_select.visibility = View.INVISIBLE
                 }
-                if (questionNumber == 1) {
+                if (questionNumber == 10) {
                     startActivity(ResultActivity.newIntent(this@QuizActivity))
                 } else {
                     showQuestion()
