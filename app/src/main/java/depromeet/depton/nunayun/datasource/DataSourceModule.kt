@@ -10,7 +10,6 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 
-
 val dataSourceModule = module {
     single<RetrofitService> {
         Retrofit.Builder()

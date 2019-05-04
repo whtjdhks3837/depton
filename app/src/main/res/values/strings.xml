@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">nunayun</string>
+    <string name="quiz_count_detail">%d초 뒤에 시작합니다.</string>
+    <string name="quiz_title_number">Quiz %d</string>
     <string name="kakao_app_key">1ace8c886c09831c114517ba3d99e906</string>
     <string name="home_title">함께 취향을 찾을\n친구를 찾아보세요</string>
 </resources>
