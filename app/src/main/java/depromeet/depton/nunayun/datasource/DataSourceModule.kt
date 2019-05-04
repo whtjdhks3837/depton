@@ -1,5 +1,6 @@
 package depromeet.depton.nunayun.datasource
 
+import depromeet.depton.nunayun.datasource.remote.RetrofitService
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -10,8 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 
 
-val retrofitModule = module {
-
+val dataSourceModule = module {
     single<RetrofitService> {
         Retrofit.Builder()
             .client(
