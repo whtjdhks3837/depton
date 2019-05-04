@@ -2,35 +2,82 @@ package depromeet.depton.nunayun.presentation.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.kakao.kakaolink.v2.KakaoLinkResponse
+import depromeet.depton.nunayun.model.User
 import depromeet.depton.nunayun.presentation.base.BaseViewModel
+import depromeet.depton.nunayun.repository.HomeRepository
 import depromeet.depton.nunayun.util.KakaoUtil
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import okhttp3.ResponseBody
+import java.util.concurrent.TimeUnit
 
-class HomeViewModel : BaseViewModel() {
+class HomeViewModel(private val repository: HomeRepository) : BaseViewModel() {
 
-    private val _invite = MutableLiveData<KakaoLinkResponse>()
+    private val _user = MutableLiveData<User>()
+
+    private val _invite = MutableLiveData<ResponseBody>()
+
+    private val _accept = MutableLiveData<ResponseBody>()
 
     private val _error = MutableLiveData<String>()
 
-    val invite: LiveData<KakaoLinkResponse> = _invite
+    val user: LiveData<User> = _user
+
+    val invite: LiveData<ResponseBody> = _invite
+
+    val accept: LiveData<ResponseBody> = _accept
 
     val error: LiveData<String> = _error
 
-    fun sendInvite() {
-        KakaoUtil.sendLink()
+    fun getInviteId() {
+        KakaoUtil.requestAccessTokenInfo()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                _invite.value = it
+                repository.getUsers(it.userId.toString())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({ user ->
+                        _user.value = user
+                    }, {
+                        it.printStackTrace()
+                        _error.value = "error"
+                    })
             }, {
                 it.printStackTrace()
                 _error.value = "error"
             }).bind()
     }
-}
 
-class HomeViewModelFactory : ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return HomeViewModel() as T
+    fun sendInvite(token: String) {
+        KakaoUtil.sendLink()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                repository.postInvites(token)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({
+                        _invite.value = it
+                    }, {
+                        it.printStackTrace()
+                        _error.value = "error"
+                    })
+            }, {
+                it.printStackTrace()
+                _error.value = "error"
+            }).bind()
+    }
+
+    fun waitAccept(token: String, inviteId: String) {
+        repository.postInviteAccept(token, inviteId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .repeatWhen { it.delay(5, TimeUnit.SECONDS) }
+            .subscribe({
+                _accept.value = it
+            }, {
+                it.printStackTrace()
+            }).bind()
     }
 }

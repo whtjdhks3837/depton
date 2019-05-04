@@ -20,7 +20,7 @@ val dataSourceModule = module {
             )
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("")
+            .baseUrl("http://13.209.246.67:3000/")
             .build()
             .create()
     }
