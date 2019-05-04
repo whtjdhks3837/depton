@@ -12,6 +12,7 @@ import depromeet.depton.nunayun.databinding.ActivityQuizBinding
 import depromeet.depton.nunayun.presentation.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_quiz.*
 import android.view.animation.DecelerateInterpolator
+import depromeet.depton.nunayun.presentation.result.ResultActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class QuizActivity : BaseActivity<ActivityQuizBinding>() {
@@ -46,6 +47,10 @@ class QuizActivity : BaseActivity<ActivityQuizBinding>() {
         image_quiz_flip2_down.setOnClickListener {
             image_quiz_flip2_up_select.visibility = View.INVISIBLE
             image_quiz_flip2_down_select.visibility = View.VISIBLE
+        }
+
+        btn_quiz_exit.setOnClickListener {
+            finish()
         }
     }
 
@@ -129,8 +134,8 @@ class QuizActivity : BaseActivity<ActivityQuizBinding>() {
                     image_quiz_flip2_up_select.visibility = View.INVISIBLE
                     image_quiz_flip2_down_select.visibility = View.INVISIBLE
                 }
-                if (questionNumber == 10) {
-                    finish()
+                if (questionNumber == 1) {
+                    startActivity(ResultActivity.newIntent(this@QuizActivity))
                 } else {
                     showQuestion()
                 }

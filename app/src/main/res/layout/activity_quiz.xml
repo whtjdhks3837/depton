@@ -15,6 +15,7 @@
         android:background="@drawable/bg_gradient_purple">
 
         <ImageView
+            android:id="@+id/btn_quiz_exit"
             android:layout_width="44dp"
             android:layout_height="44dp"
             android:src="@drawable/cancel"
@@ -249,6 +250,9 @@
             android:layout_marginBottom="18dp"
             android:layout_marginStart="36dp"
             android:layout_marginEnd="36dp"
+            android:progressBackgroundTint="#0affffff"
+            android:progressTint="#28ffffff"
+            android:progress="50"
             style="@android:style/Widget.ProgressBar.Horizontal"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
