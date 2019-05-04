@@ -1,6 +1,5 @@
 package depromeet.depton.nunayun.datasource
 
-import depromeet.depton.nunayun.datasource.remote.MockRetrofitService
 import depromeet.depton.nunayun.datasource.remote.RetrofitService
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
