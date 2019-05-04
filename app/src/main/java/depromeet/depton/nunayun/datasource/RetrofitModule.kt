@@ -1,6 +1,5 @@
 package depromeet.depton.nunayun.datasource
 
-import com.google.gson.Gson
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
