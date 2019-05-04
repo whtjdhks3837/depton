@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">nunayun</string>
+    <string name="quiz_count_detail">%d초 뒤에 시작합니다.</string>
+    <string name="quiz_title_number">Quiz %d</string>
 </resources>

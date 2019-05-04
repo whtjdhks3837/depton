@@ -1,7 +1,255 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools">
 
-</LinearLayout>
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="vm"
+            type="depromeet.depton.nunayun.presentation.quiz.QuizViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_gradient_purple">
+
+        <ImageView
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:src="@drawable/cancel"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="18dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <ImageView
+            android:id="@+id/image_quiz_other_user_photo"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:src="@drawable/cancel"
+            android:layout_marginEnd="18dp"
+            android:layout_marginTop="18dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/text_quiz_other_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#99ffffff"
+            android:text="김김김님"
+            android:textSize="15sp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintTop_toTopOf="@id/image_quiz_other_user_photo"
+            app:layout_constraintBottom_toBottomOf="@id/image_quiz_other_user_photo"
+            app:layout_constraintEnd_toStartOf="@id/image_quiz_other_user_photo"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/card_quiz_flip1"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:background="@drawable/card_background_white"
+            android:visibility="visible"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <View
+                android:id="@+id/highlight_quiz_title"
+                android:layout_width="82dp"
+                android:layout_height="20dp"
+                android:background="#4c27ffa2"
+                app:layout_constraintBottom_toBottomOf="@id/text_quiz_title"
+                app:layout_constraintStart_toStartOf="@id/text_quiz_title"
+                app:layout_constraintEnd_toEndOf="@id/text_quiz_title"/>
+
+            <TextView
+                android:id="@+id/text_quiz_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:textSize="28dp"
+                android:textColor="#343434"
+                android:fontFamily="@font/quizfont"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="Quiz 1"/>
+
+            <TextView
+                android:id="@+id/text_quiz_content"
+                android:layout_width="248dp"
+                android:layout_height="wrap_content"
+                android:textSize="28dp"
+                android:textColor="#343434"
+                android:fontFamily="@font/basefont"
+                android:textStyle="italic"
+                android:gravity="center"
+                android:layout_marginTop="26dp"
+                app:layout_constraintTop_toBottomOf="@+id/text_quiz_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="둘 중에 더 좋아하는 음식을 골라주세요"/>
+
+            <TextView
+                android:id="@+id/text_quiz_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:textColor="#d0d0d0"
+                android:fontFamily="@font/basefont"
+                android:textStyle="italic"
+                android:gravity="center"
+                android:layout_marginBottom="14dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="1/10"/>
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_quiz_question"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:constraint_referenced_ids="highlight_quiz_title, text_quiz_title, text_quiz_content, text_quiz_order"/>
+
+            <TextView
+                android:id="@+id/text_quiz_count"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="70dp"
+                android:background="@drawable/ring_pink_thick"
+                android:gravity="center"
+                android:textSize="80sp"
+                android:textColor="#ff2779"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="3"/>
+
+            <TextView
+                android:id="@+id/text_quiz_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#d0d0d0"
+                android:fontFamily="@font/basefont"
+                android:textStyle="italic"
+                android:textSize="15sp"
+                app:layout_constraintTop_toBottomOf="@id/text_quiz_count"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="3초 뒤에 시작합니다."/>
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_quiz_countdown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:constraint_referenced_ids="text_quiz_detail, text_quiz_count, text_quiz_detail"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/card_quiz_flip2"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:visibility="visible"
+            android:background="@drawable/card_background_white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:visibility="gone">
+
+            <View
+                android:id="@+id/view_quiz_flip2_center"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#979797"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/image_quiz_flip2_up"
+                android:layout_width="84dp"
+                android:layout_height="84dp"
+                android:layout_marginStart="26dp"
+                android:src="@drawable/cancel"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/view_quiz_flip2_center"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/image_quiz_flip2_up_select"
+                android:visibility="invisible"
+                android:layout_width="84dp"
+                android:layout_height="84dp"
+                android:layout_marginStart="26dp"
+                android:src="#ff2779"
+                android:alpha="0.5"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/view_quiz_flip2_center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="가나다라마사아자"
+                android:layout_marginStart="12dp"
+                android:fontFamily="@font/basefont"
+                android:textStyle="italic"
+                android:textSize="20dp"
+                app:layout_constraintTop_toTopOf="@id/image_quiz_flip2_up"
+                app:layout_constraintStart_toEndOf="@id/image_quiz_flip2_up"
+                app:layout_constraintBottom_toBottomOf="@id/image_quiz_flip2_up"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/image_quiz_flip2_down"
+                android:layout_width="84dp"
+                android:layout_height="84dp"
+                android:layout_marginStart="26dp"
+                android:src="@drawable/ic_launcher_background"
+                app:layout_constraintTop_toTopOf="@id/view_quiz_flip2_center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/image_quiz_flip2_down_select"
+                android:layout_width="84dp"
+                android:layout_height="84dp"
+                android:layout_marginStart="26dp"
+                android:src="#ff2779"
+                android:visibility="invisible"
+                android:alpha="0.5"
+                app:layout_constraintTop_toTopOf="@id/view_quiz_flip2_center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="가나다라마사아자"
+                android:layout_marginStart="12dp"
+                android:fontFamily="@font/basefont"
+                android:textStyle="italic"
+                android:textSize="20dp"
+                app:layout_constraintTop_toTopOf="@id/image_quiz_flip2_down"
+                app:layout_constraintStart_toEndOf="@id/image_quiz_flip2_down"
+                app:layout_constraintBottom_toBottomOf="@id/image_quiz_flip2_down"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ProgressBar
+            android:id="@+id/pgbar_quiz"
+            android:visibility="invisible"
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="18dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginEnd="36dp"
+            style="@android:style/Widget.ProgressBar.Horizontal"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
