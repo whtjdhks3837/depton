@@ -2,6 +2,7 @@ package depromeet.depton.nunayun.presentation.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.kakao.auth.Session
 import depromeet.depton.nunayun.model.User
 import depromeet.depton.nunayun.presentation.base.BaseViewModel
 import depromeet.depton.nunayun.repository.HomeRepository
@@ -34,7 +35,7 @@ class HomeViewModel(private val repository: HomeRepository) : BaseViewModel() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                repository.getUsers(it.userId.toString())
+                repository.getUsers(Session.getCurrentSession().tokenInfo.accessToken, it.userId.toString())
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ user ->

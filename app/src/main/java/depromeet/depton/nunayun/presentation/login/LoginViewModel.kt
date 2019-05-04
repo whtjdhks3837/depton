@@ -2,6 +2,8 @@ package depromeet.depton.nunayun.presentation.login
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.gson.JsonObject
+import depromeet.depton.nunayun.model.KakaoToken
 import depromeet.depton.nunayun.model.Question
 import depromeet.depton.nunayun.presentation.base.BaseViewModel
 import depromeet.depton.nunayun.repository.LoginRepository
@@ -19,7 +21,7 @@ class LoginViewModel(private val repository: LoginRepository) : BaseViewModel() 
 
     val error: LiveData<String> = _error
 
-    fun postUser(token: Question) {
+    fun postUser(token: KakaoToken) {
         repository.postUsers(token)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

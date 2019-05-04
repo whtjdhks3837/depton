@@ -11,7 +11,7 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         Thread(Runnable {
-            Thread.sleep(500)
+            Thread.sleep(3000)
             startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
             finish()
         }).start()

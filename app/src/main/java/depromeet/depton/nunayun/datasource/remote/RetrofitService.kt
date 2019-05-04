@@ -1,6 +1,8 @@
 package depromeet.depton.nunayun.datasource.remote
 
+import com.google.gson.JsonObject
 import depromeet.depton.nunayun.model.Answer
+import depromeet.depton.nunayun.model.KakaoToken
 import depromeet.depton.nunayun.model.Question
 import depromeet.depton.nunayun.model.User
 import io.reactivex.Completable
@@ -16,17 +18,17 @@ interface RetrofitService {
     fun postQuestions(@Path("inviteId") inviteId: String, @Body answer: Answer): Completable
 
     @POST("users")
-    fun postUsers(@Body token: Question): Single<ResponseBody>
+    fun postUsers(@Body token: KakaoToken): Single<ResponseBody>
 
     @GET("users/{kakaoUID}")
-    fun getUsers(@Path("kakaoUID") kakaoUID: String): Single<User>
+    fun getUsers(@Header("Authorization") token: String, @Path("kakaoUID") kakaoUID: String): Single<User>
 
     @POST("invites")
-    fun postInvites(@Header("kakaoToken") token: String): Single<ResponseBody>
+    fun postInvites(@Header("Authorization") token: String): Single<ResponseBody>
 
     @POST("invites/{inviteId}/accept")
     fun postInviteAccept(
-        @Header("kakaoToken") token: String,
+        @Header("Authorization") token: String,
         @Path("inviteId") inviteId: String
     ): Single<ResponseBody>
 }

@@ -25,7 +25,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
             viewModel.sendInvite(token)
         }
 
-
         viewModel.user.observe(this, Observer {
             viewModel.waitAccept(token, it.currentInviteId)
         })
@@ -34,6 +33,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
             binding.title.text = "친구의 수락을\n 기다리는 중입니다"
             binding.inviteText.text = "초대 취소하기"
             binding.inviteBtn.visibility = View.INVISIBLE
+            binding.centerImg.setImageResource(R.drawable.invite_02)
             viewModel.getInviteId()
         })
 

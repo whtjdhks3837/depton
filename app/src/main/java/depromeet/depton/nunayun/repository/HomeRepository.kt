@@ -4,10 +4,11 @@ import depromeet.depton.nunayun.datasource.remote.RetrofitService
 import depromeet.depton.nunayun.model.User
 import io.reactivex.Single
 import okhttp3.ResponseBody
+import retrofit2.http.Header
 
 interface HomeRepository {
 
-    fun getUsers(kakaoUID: String): Single<User>
+    fun getUsers(token: String, kakaoUID: String): Single<User>
 
     fun postInvites(token: String): Single<ResponseBody>
 
@@ -16,7 +17,7 @@ interface HomeRepository {
 
 class HomeRepositoryImpl(private val retrofitService: RetrofitService) : HomeRepository {
 
-    override fun getUsers(kakaoUID: String): Single<User> = retrofitService.getUsers(kakaoUID)
+    override fun getUsers(token: String, kakaoUID: String): Single<User> = retrofitService.getUsers(token, kakaoUID)
 
     override fun postInvites(token: String): Single<ResponseBody> = retrofitService.postInvites(token)
 

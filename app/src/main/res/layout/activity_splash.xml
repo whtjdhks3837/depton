@@ -5,17 +5,20 @@
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_gradient_purple">
 
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="너 나 연"
-                android:textColor="#d8d8d8"
-                android:textSize="70dp"
+        <ImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:src="@drawable/logo_home"
+                app:layout_constraintWidth_percent="0.67"
+                app:layout_constraintHeight_percent="0.08"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintVertical_bias="0.45"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

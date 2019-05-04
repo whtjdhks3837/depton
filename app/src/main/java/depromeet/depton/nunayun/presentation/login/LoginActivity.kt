@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import com.google.gson.Gson
+import com.google.gson.JsonObject
 import com.kakao.auth.ISessionCallback
 import com.kakao.auth.Session
 import com.kakao.util.exception.KakaoException
@@ -15,6 +17,10 @@ import depromeet.depton.nunayun.presentation.base.BaseActivity
 import depromeet.depton.nunayun.presentation.home.HomeActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
+import org.json.JSONObject
+import com.google.gson.JsonParser
+import depromeet.depton.nunayun.model.KakaoToken
+
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
@@ -62,8 +68,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         }
 
         override fun onSessionOpened() {
-            val question = Question(Session.getCurrentSession().tokenInfo.accessToken)
-            viewModel.postUser(question)
+            viewModel.postUser(KakaoToken(Session.getCurrentSession().tokenInfo.accessToken))
         }
     }
 }
