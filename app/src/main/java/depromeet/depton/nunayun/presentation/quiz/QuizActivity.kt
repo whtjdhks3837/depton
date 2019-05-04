@@ -12,6 +12,7 @@ import depromeet.depton.nunayun.databinding.ActivityQuizBinding
 import depromeet.depton.nunayun.presentation.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_quiz.*
 import android.view.animation.DecelerateInterpolator
+import com.squareup.picasso.Picasso
 import depromeet.depton.nunayun.presentation.result.ResultActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -32,6 +33,9 @@ class QuizActivity : BaseActivity<ActivityQuizBinding>() {
 
     private fun bindView() {
         showFirst()
+        Picasso.get().load("https://homecuisine.co.kr/files/attach/images/140/557/014/540f1d338307b8c01776b5c23ec03c85.JPG").fit().into(image_quiz_flip2_up)
+        Picasso.get().load("https://t1.daumcdn.net/cfile/tistory/265BEF3F5614FAEB31").fit().into(image_quiz_flip2_down)
+
         card_quiz_flip2.visibility = View.INVISIBLE
 
         image_quiz_flip2_up.setOnClickListener {

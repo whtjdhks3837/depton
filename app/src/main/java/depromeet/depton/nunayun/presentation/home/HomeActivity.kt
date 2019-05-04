@@ -1,5 +1,6 @@
 package depromeet.depton.nunayun.presentation.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -8,6 +9,7 @@ import com.kakao.auth.Session
 import depromeet.depton.nunayun.R
 import depromeet.depton.nunayun.databinding.ActivityHomeBinding
 import depromeet.depton.nunayun.presentation.base.BaseActivity
+import depromeet.depton.nunayun.presentation.quiz.QuizActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeActivity : BaseActivity<ActivityHomeBinding>() {
@@ -41,5 +43,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
             Toast.makeText(this@HomeActivity, "error", Toast.LENGTH_SHORT)
                 .show()
         })
+
+        startActivity(Intent(this, QuizActivity::class.java))
     }
 }

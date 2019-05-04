@@ -326,7 +326,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="가나다라마사아자"
+                android:text="짜장면"
                 android:layout_marginStart="12dp"
                 android:fontFamily="@font/basefont"
                 android:textStyle="italic"
@@ -360,7 +360,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="가나다라마사아자"
+                android:text="짬뽕"
                 android:layout_marginStart="12dp"
                 android:fontFamily="@font/basefont"
                 android:textStyle="italic"
