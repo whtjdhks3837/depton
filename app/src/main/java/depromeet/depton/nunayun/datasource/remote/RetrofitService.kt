@@ -11,7 +11,7 @@ import retrofit2.http.Path
 
 interface RetrofitService {
     @GET("questions/{inviteId}")
-    fun getQuestions(@Path("inviteId") inviteId: String): Single<Question>
+    fun getQuestions(@Path("inviteId") inviteId: String): Single<List<Question>>
 
     @POST("questions/{inviteId}")
     fun postQuestions(@Path("inviteId") inviteId: String, @Body answer: Answer): Completable

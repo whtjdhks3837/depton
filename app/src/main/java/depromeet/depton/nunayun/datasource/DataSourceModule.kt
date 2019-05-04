@@ -1,5 +1,6 @@
 package depromeet.depton.nunayun.datasource
 
+import depromeet.depton.nunayun.datasource.remote.MockRetrofitService
 import depromeet.depton.nunayun.datasource.remote.RetrofitService
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -12,17 +13,18 @@ import retrofit2.create
 
 val dataSourceModule = module {
     single<RetrofitService> {
-        Retrofit.Builder()
-            .client(
-                OkHttpClient.Builder()
-                    .addInterceptor(get())
-                    .build()
-            )
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("")
-            .build()
-            .create()
+        MockRetrofitService()
+//        Retrofit.Builder()
+//            .client(
+//                OkHttpClient.Builder()
+//                    .addInterceptor(get())
+//                    .build()
+//            )
+//            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .baseUrl("")
+//            .build()
+//            .create()
     }
 
     single {
